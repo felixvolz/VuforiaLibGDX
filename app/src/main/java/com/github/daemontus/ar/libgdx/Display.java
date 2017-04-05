@@ -11,22 +11,12 @@ import com.github.daemontus.ar.vuforia.VuforiaRenderer;
  */
 public class Display implements Screen {
 
-    public ModelInstance modelInstance;
-    public Model model;
-
-    private Renderer mRenderer;
+    private SpriteBatchRenderer mRenderer;
 
     public Display(VuforiaRenderer vuforiaRenderer) {
 
-        mRenderer = new Renderer(vuforiaRenderer);
+        mRenderer = new SpriteBatchRenderer(vuforiaRenderer);
 
-        AssetManager assets = new AssetManager();
-        assets.load("jet.g3db", Model.class);
-        assets.finishLoading();
-
-        model = assets.get("jet.g3db", Model.class);
-
-        modelInstance = new ModelInstance(model);
 
     }
 

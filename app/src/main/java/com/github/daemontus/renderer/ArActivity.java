@@ -248,7 +248,7 @@ public class ArActivity extends AndroidApplication implements SessionControl {
         }
 
         if (posterDataSet != null) {
-            if (imageTracker.getActiveDataSet() == posterDataSet && !imageTracker.deactivateDataSet(posterDataSet)) {
+            if (imageTracker.getActiveDataSet(0) == posterDataSet && !imageTracker.deactivateDataSet(posterDataSet)) {
                 Log.d(LOGTAG, "Failed to destroy the tracking data set StonesAndChips because the data set could not be deactivated.");
                 result = false;
             } else if (!imageTracker.destroyDataSet(posterDataSet)) {

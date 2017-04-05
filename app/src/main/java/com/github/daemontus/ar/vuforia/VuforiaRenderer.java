@@ -5,8 +5,10 @@ import android.util.Log;
 
 import com.vuforia.CameraCalibration;
 import com.vuforia.CameraDevice;
+import com.vuforia.Matrix44F;
 import com.vuforia.Renderer;
 import com.vuforia.State;
+import com.vuforia.Tool;
 import com.vuforia.TrackableResult;
 import com.vuforia.Vec2F;
 import com.vuforia.Vuforia;
@@ -27,7 +29,7 @@ public class VuforiaRenderer {
     public boolean mIsActive = false;
 
     public float fieldOfViewRadians;
-
+    public Matrix44F projectionMatrix = null;
 
     public VuforiaRenderer(AppSession session)
     {
@@ -86,6 +88,10 @@ public class VuforiaRenderer {
             Vec2F size = calibration.getSize();
             Vec2F focalLength = calibration.getFocalLength();
             fieldOfViewRadians = (float) (2 * Math.atan(0.5f * size.getData()[0] / focalLength.getData()[0]));
+
+            float nearPlane = 1f;
+            float farPlane = 1000f;
+            projectionMatrix = Tool.getProjectionGL(calibration, nearPlane, farPlane);
         }
 
         mRenderer.end();
